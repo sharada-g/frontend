@@ -16,10 +16,16 @@ const CommentContainer = styled.div`
 const CommentName = styled.h1`
   color: black;
   font-size: 1.75rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    font-size: 1.25rem;
+  }
 `;
 
 const CommentBody = styled.p`
   font-size: 1.25rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    font-size: 1rem;
+  }
 `;
 
 const CommentReplyBtn = styled.button`
@@ -31,6 +37,12 @@ const CommentReplyBtn = styled.button`
   color: ${(props) => props.theme.primaryColor};
   background-color: transparent;
   font-size: 1.25rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    padding: 2.5px;
+    width: 40%;
+    height: max-content;
+    font-size: 1rem;
+  }
 `;
 
 function CommentBox() {

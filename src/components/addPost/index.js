@@ -23,6 +23,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    top: 125px;
+    width: 90%;
+    border-radius: 5px;
+  }
 `;
 
 const DetailInput = styled.textarea`
@@ -36,6 +41,11 @@ const DetailInput = styled.textarea`
   box-shadow: 0px 0px 10px 5px ${(props) => props.theme.shadowColorPrimary};
   align-self: center;
   padding: 10px;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    margin-top: 40px;
+    width: 90%;
+    height: 175px;
+  }
   //change placeholder color
   ::placeholder {
     position: absolute;
@@ -43,6 +53,10 @@ const DetailInput = styled.textarea`
     margin-left: 5%;
     color: ${(props) => props.theme.shadowColorPrimary};
     font-size: xxx-large;
+    @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+      margin-top: 25px;
+      font-size: xx-large;
+    }
   }
 `;
 
@@ -57,12 +71,19 @@ const NameInput = styled.input`
   box-shadow: 0px 0px 10px 5px ${(props) => props.theme.shadowColorPrimary};
   align-self: center;
   padding: 0 10px;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    margin-top: 17.5px;
+    width: 90%;
+  }
   ::placeholder {
     position: absolute;
     margin-top: 25px;
     margin-left: 5%;
     color: ${(props) => props.theme.shadowColorPrimary};
     font-size: xx-large;
+    @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+      font-size: x-large;
+    }
   }
 `;
 
@@ -78,17 +99,26 @@ const NewPostBtn = styled.button`
   color: white;
   background-color: ${(props) => props.theme.primaryColor};
   border: none;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    margin-top: 17.5px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    height: max-content;
+    padding: 2.5px;
+  }
 `;
 
 function AddPost() {
   return (
     <>
-      <BgContainer />
+      {/* <BgContainer />
       <Container>
         <DetailInput placeholder="Write your post..." />
         <NameInput placeholder="Enter your pseudonym" />
         <NewPostBtn>Post</NewPostBtn>
-      </Container>
+      </Container> */}
     </>
   );
 }

@@ -12,12 +12,20 @@ const Container = styled.div`
   margin: auto;
   width: 75%;
   height: fit-content;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    top: 200px;
+    width: 85%;
+  }
 `;
 
 const ReplyContainer = styled.div`
-  margin-left: 12.5%;
-  width: 87.5%;
+  margin-left: 15%;
+  width: 85%;
   height: fit-content;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    margin-left: 5%;
+    width: 95%;
+  }
 `;
 
 function ViewPost() {

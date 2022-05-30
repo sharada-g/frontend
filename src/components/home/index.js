@@ -12,6 +12,9 @@ const Header = styled.div`
   height: 110px;
   background-color: ${(props) => props.theme.secondaryColor};
   z-index: 0;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    height: 90px;
+  }
 `;
 
 function Home() {

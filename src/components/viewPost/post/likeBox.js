@@ -13,6 +13,9 @@ const LikeContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    width: 12.5%;
+  }
 `;
 const LikeYesBtn = styled.button`
   height: 33%;

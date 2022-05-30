@@ -16,6 +16,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   z-index: 1;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    width: 95%;
+    height: 150px;
+  }
 `;
 
 const Header = styled.h1`
@@ -24,6 +28,10 @@ const Header = styled.h1`
   color: white;
   //font-size: xx-large;
   font-size: 2rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    font-size: 1.5rem;
+    width: 66%;
+  }
 `;
 
 const PostBtn = styled.button`
@@ -35,6 +43,12 @@ const PostBtn = styled.button`
   color: white;
   background-color: transparent;
   font-size: 2rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    font-size: 1rem;
+    border-radius: 10px;
+    height: max-content;
+    height: 50px;
+  }
 `;
 
 function Banner() {
