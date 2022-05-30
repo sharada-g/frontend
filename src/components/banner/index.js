@@ -9,9 +9,9 @@ const Container = styled.div`
   margin: auto;
   width: 85%;
   height: 225px;
-  background-color: #141c3a;
+  background-color: ${(props) => props.theme.tineryColor};
   border-radius: 25px;
-  box-shadow: 0px 10px 10px #5e0dc7;
+  box-shadow: 0px 10px 10px ${(props) => props.theme.shadowColorSecondary};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,7 +31,7 @@ const PostBtn = styled.button`
   width: 33%;
   height: 100px;
   border-radius: 45px;
-  border-color: #7510f7;
+  border-color: ${(props) => props.theme.primaryColor};
   color: white;
   background-color: transparent;
   font-size: 2rem;

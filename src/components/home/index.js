@@ -10,7 +10,7 @@ const Header = styled.div`
   top: 0px;
   width: 100%;
   height: 110px;
-  background-color: #f7f7f7;
+  background-color: ${(props) => props.theme.secondaryColor};
   z-index: 0;
 `;
 

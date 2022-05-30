@@ -6,7 +6,7 @@ const CommentContainer = styled.div`
   width: 100%;
   min-height: 150px;
   height: fit-content;
-  box-shadow: 0px 0px 10px 2px #5c0dc2;
+  box-shadow: 0px 0px 10px 2px ${(props) => props.theme.shadowColorSecondary};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,8 +27,8 @@ const CommentReplyBtn = styled.button`
   width: 20%;
   height: 60px;
   border-radius: 35px;
-  border-color: #7510f7;
-  color: #7510f7;
+  border-color: ${(props) => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   background-color: transparent;
   font-size: 1.25rem;
 `;
