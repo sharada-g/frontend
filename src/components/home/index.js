@@ -5,6 +5,8 @@ import styled from "styled-components";
 import ViewPost from "../viewPost";
 import AddPost from "../addPost";
 
+import { useContextProvider } from "../../context/contextProvider";
+
 const Header = styled.div`
   position: absolute;
   top: 0px;
@@ -18,11 +20,12 @@ const Header = styled.div`
 `;
 
 function Home() {
+  const { ShowNewPostView } = useContextProvider();
+
   return (
     <>
       <Header />
-      <ViewPost />
-      <AddPost />
+      <ViewPost />({ShowNewPostView && <AddPost />})
     </>
   );
 }

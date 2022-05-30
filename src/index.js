@@ -2,15 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, LightTheme } from "./styles/globlestyle";
+
+import ContextProvider from "./context/contextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <GlobalStyle />
     <ThemeProvider theme={LightTheme}>
-      <App />
+      <ContextProvider>
+        <App />
+      </ContextProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
