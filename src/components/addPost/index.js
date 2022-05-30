@@ -25,7 +25,7 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const DetailInput = styled.input`
+const DetailInput = styled.textarea`
   margin-top: 140px;
   width: 65%;
   height: 275px;
@@ -35,13 +35,14 @@ const DetailInput = styled.input`
   font-size: 1.5rem;
   box-shadow: 0px 0px 10px 5px ${(props) => props.theme.shadowColorPrimary};
   align-self: center;
+  padding: 10px;
   //change placeholder color
   ::placeholder {
     position: absolute;
     margin-top: 50px;
     margin-left: 5%;
     color: ${(props) => props.theme.shadowColorPrimary};
-    font-size: xx-large;
+    font-size: xxx-large;
   }
 `;
 
@@ -55,6 +56,7 @@ const NameInput = styled.input`
   font-size: 1.5rem;
   box-shadow: 0px 0px 10px 5px ${(props) => props.theme.shadowColorPrimary};
   align-self: center;
+  padding: 0 10px;
   ::placeholder {
     position: absolute;
     margin-top: 25px;
@@ -81,12 +83,12 @@ const NewPostBtn = styled.button`
 function AddPost() {
   return (
     <>
-      {/* <BgContainer />
+      <BgContainer />
       <Container>
         <DetailInput placeholder="Write your post..." />
         <NameInput placeholder="Enter your pseudonym" />
         <NewPostBtn>Post</NewPostBtn>
-      </Container> */}
+      </Container>
     </>
   );
 }
