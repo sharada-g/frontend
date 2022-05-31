@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
@@ -34,9 +34,8 @@ const Container = styled(motion.div)`
   }
 `;
 const ContainerVariant = {
-  rest: { top: -1500, scale: 0, opacity: 0 },
+  rest: { scale: 0, opacity: 0 },
   anim: {
-    top: 275,
     scale: 1,
     opacity: 1,
     transition: {
@@ -107,10 +106,14 @@ const NameInput = styled.input`
 const ErrorMsg = styled.p`
   display: block;
   margin: auto;
-  margin-top: 10px;
+  margin-top: 5px;
   width: 65%;
   color: red;
   font-size: 1rem;
+  font-weight: bold;
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+    margin-left: 2.5%;
+  }
 `;
 
 const NewPostBtn = styled(motion.button)`
@@ -175,36 +178,39 @@ function AddPost() {
   const { ShowNewPostView, setShowNewPostView } = useContextProvider();
 
   const [disabledBtn, setDisabledBtn] = useState(false);
+  const [formSubmited, setFormSubmited] = useState(false);
   const [formValue, setFormValue] = useState({
     name: "",
     detail: "",
   });
-  const [errorMsg, setErrorMsg] = useState([]);
+
+  useEffect(() => {
+    // check if form is valid and disable button
+    if (
+      formSubmited &&
+      (formValue.name.length === 0 || formValue.detail.length === 0)
+    ) {
+      setDisabledBtn(true);
+    } else return setDisabledBtn(false);
+
+    // check for any error
+  }, [formSubmited, formValue]);
 
   //handle form change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
-    setDisabledBtn(false);
-    setErrorMsg([]);
   };
+
   //handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDisabledBtn(true);
+    setFormSubmited(true);
     // validate form name and detail
-    let message = [];
 
-    if (formValue.detail.length < 1) {
-      message.push("Detail is required!");
-    }
-    if (formValue.name.length < 1) {
-      message.push("Name is required!");
-    }
     if (formValue.name.length > 0 && formValue.detail.length > 0) {
       setShowNewPostView(false);
     }
-    setErrorMsg(message);
   };
   return (
     <>
@@ -226,17 +232,20 @@ function AddPost() {
           value={formValue.detail}
           onChange={handleChange}
         />
+
+        {formValue.detail.length < 1 && formSubmited && (
+          <ErrorMsg>Please write something in the post detail field</ErrorMsg>
+        )}
+
         <NameInput
           placeholder="Enter your pseudonym"
           name="name"
           value={formValue.name}
           onChange={handleChange}
         />
-        <ErrorMsg>
-          {errorMsg.map((msg) => (
-            <span key={msg}>{msg} </span>
-          ))}
-        </ErrorMsg>
+        {formValue.name.length < 1 && formSubmited && (
+          <ErrorMsg>Please enter your name in the pseudonym field</ErrorMsg>
+        )}
         <NewPostBtn
           disabled={disabledBtn}
           variants={NewPostBtnVariant}
