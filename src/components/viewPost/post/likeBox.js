@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 const LikeContainer = styled.div`
   width: 5%;
@@ -70,10 +72,9 @@ const LikeYesBtnVariant = {
 };
 const LikeYesIcon = styled(motion.div)`
   position: absolute;
-  width: 25px;
-  height: 25px;
-  color: ${(props) => props.theme.fourthColor};
-  background-color: red;
+  width: 50px;
+  height: 50px;
+  color: red;
 `;
 const LikeYesIconVariant = {
   rest: { y: 0, scale: 0, opacity: 0 },
@@ -149,10 +150,9 @@ const LikeNoBtnVariant = {
 
 const LikeNoIcon = styled(motion.div)`
   position: absolute;
-  width: 25px;
-  height: 25px;
-  color: ${(props) => props.theme.fourthColor};
-  background-color: red;
+  width: 50px;
+  height: 50px;
+  color: white;
 `;
 const LikeNoIconVariant = {
   rest: { y: 0, scale: 0, opacity: 0 },
@@ -213,7 +213,9 @@ function LikeBox({ id, likes }) {
             initial="rest"
             animate="anim"
             exit="rest"
-          />
+          >
+            <FontAwesomeIcon icon={faHeart} size="3x" />
+          </LikeYesIcon>
         )}
         <LikeCount>{likes}</LikeCount>
         <LikeNoBtn
@@ -234,7 +236,9 @@ function LikeBox({ id, likes }) {
             initial="rest"
             animate="anim"
             exit="rest"
-          />
+          >
+            <FontAwesomeIcon icon={faThumbsDown} size="3x" />
+          </LikeNoIcon>
         )}
       </LikeContainer>
     </>
