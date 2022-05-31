@@ -68,6 +68,7 @@ const PostBtnVariant = {
   },
   hover: {
     scale: [1, 0.9, 1],
+    opacity: [1, 0.75, 1],
     transition: {
       type: "spring",
       duration: 0.4,

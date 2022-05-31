@@ -38,7 +38,7 @@ const CommentReplyBtn = styled.button`
   background-color: transparent;
   font-size: 1.25rem;
   @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
-    padding: 2.5px;
+    padding: 5px;
     width: 40%;
     height: max-content;
     font-size: 1rem;

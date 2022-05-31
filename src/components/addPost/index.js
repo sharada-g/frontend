@@ -157,6 +157,7 @@ const NewPostBtnVariant = {
   },
   hover: {
     scale: [1, 0.9, 1],
+    opacity: [1, 0.75, 1],
     transition: {
       type: "spring",
       duration: 0.4,
@@ -170,6 +171,16 @@ const NewPostBtnVariant = {
       type: "spring",
       duration: 0.1,
       bounce: 0.5,
+    },
+  },
+  disabled: {
+    scale: 1,
+    opacity: 1,
+    x: [0, -10, 10, -10, 0],
+    transition: {
+      type: "spring",
+      bounce: 0.5,
+      duration: 0.25,
     },
   },
 };
@@ -250,9 +261,10 @@ function AddPost() {
           disabled={disabledBtn}
           variants={NewPostBtnVariant}
           initial="rest"
-          animate="anim"
+          animate={!disabledBtn ? "anim" : "disabled"}
           whileHover={!disabledBtn ? "hover" : ""}
           whileTap={!disabledBtn ? "press" : ""}
+          whiieDisabled={disabledBtn ? "disabled" : ""}
           exit="rest"
           onClick={handleSubmit}
         >
