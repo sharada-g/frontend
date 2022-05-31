@@ -40,12 +40,12 @@ const LikeNoBtn = styled.button`
   font-size: 2.5rem;
 `;
 
-function LikeBox() {
+function LikeBox({ id, likes }) {
   return (
     <>
       <LikeContainer>
         <LikeYesBtn>^</LikeYesBtn>
-        <LikeCount>302</LikeCount>
+        <LikeCount>{likes}</LikeCount>
         <LikeNoBtn>^</LikeNoBtn>
       </LikeContainer>
     </>

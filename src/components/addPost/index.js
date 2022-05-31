@@ -128,7 +128,7 @@ const NewPostBtn = styled(motion.button)`
 
   :disabled {
     background-color: ${(props) => props.theme.secondaryColor};
-    color: gray;
+    color: lightgray;
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
@@ -238,6 +238,7 @@ function AddPost({ ShowNewView, setShowNewView, name, details }) {
           name="detail"
           value={formValue.detail}
           onChange={handleChange}
+          required
         />
 
         {formValue.detail.length < 1 && formSubmited && (
@@ -249,6 +250,7 @@ function AddPost({ ShowNewView, setShowNewView, name, details }) {
           name="name"
           value={formValue.name}
           onChange={handleChange}
+          required
         />
         {formValue.name.length < 1 && formSubmited && (
           <ErrorMsg>Please enter your {name}!</ErrorMsg>

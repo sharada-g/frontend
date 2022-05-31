@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 import { useContextProvider } from "../../../context/contextProvider";
 
@@ -30,7 +31,7 @@ const CommentBody = styled.p`
   }
 `;
 
-const CommentReplyBtn = styled.button`
+const CommentReplyBtn = styled(motion.button)`
   align-self: flex-end;
   width: 20%;
   height: 60px;
@@ -47,16 +48,53 @@ const CommentReplyBtn = styled.button`
   }
 `;
 
-function CommentBox() {
+const CommentReplyBtnVariant = {
+  rest: { scale: 0, opacity: 0 },
+  anim: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.5,
+      duration: 0.5,
+    },
+  },
+  hover: {
+    scale: [1, 0.9, 1],
+    opacity: [1, 0.75, 1],
+    transition: {
+      type: "spring",
+      duration: 0.4,
+      bounce: 0.25,
+      repeat: Infinity,
+    },
+  },
+  press: {
+    scale: [1, 1.25, 1],
+    transition: {
+      type: "spring",
+      duration: 0.1,
+      bounce: 0.5,
+    },
+  },
+};
+
+function CommentBox({ id, name, details }) {
   const { ShowNewReplyView, setShowNewReplyView } = useContextProvider();
   return (
     <>
       <CommentContainer>
-        <CommentName>Pythagoras</CommentName>
-        <CommentBody>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-        </CommentBody>
+        <CommentName>
+          {name} {id}
+        </CommentName>
+        <CommentBody>{details}</CommentBody>
         <CommentReplyBtn
+          variants={CommentReplyBtnVariant}
+          initial="rest"
+          animate="anim"
+          whileHover="hover"
+          whileTap="press"
+          exit="rest"
           onClick={() => {
             !ShowNewReplyView && setShowNewReplyView(true);
           }}

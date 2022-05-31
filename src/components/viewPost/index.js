@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { AnimatePresence, motion } from "framer-motion";
 //components
 import Post from "./post";
+
+import { useContextProvider } from "../../context/contextProvider";
 
 const Container = styled.div`
   position: absolute;
@@ -28,16 +30,51 @@ const ReplyContainer = styled.div`
   }
 `;
 
+const ShowReply = ({ post, postIndex }) => {
+  return (
+    <motion.div
+      initial={{ y: -1000, opacity: 0 }}
+      animate={{
+        y: 0,
+        opacity: 1,
+        transition: {
+          delay: postIndex * 0.75,
+          type: "spring",
+          bounce: 0.5,
+          duration: 0.75,
+        },
+      }}
+    >
+      <Post key={postIndex} postId={post.id} post={post} />
+      {post.reply.length > 0
+        ? post.reply.map((reply, replyIndex) => (
+            <ReplyContainer key={replyIndex}>
+              <Post postId={post.id} post={reply} />
+            </ReplyContainer>
+          ))
+        : null}
+    </motion.div>
+  );
+};
+
 function ViewPost() {
+  const { data } = useContextProvider();
+  const { posts } = data;
+
   return (
     <>
       <Container>
-        <Post />
-        <ReplyContainer>
-          <Post />
-          <Post />
-        </ReplyContainer>
-        <Post />
+        <AnimatePresence>
+          {posts.length > 0 ? (
+            [...posts]
+              .sort((a, b) => b.id - a.id)
+              .map((post, postIndex) => (
+                <ShowReply key={post.id} post={post} postIndex={postIndex} />
+              ))
+          ) : (
+            <p>No posts to show</p>
+          )}
+        </AnimatePresence>
       </Container>
     </>
   );
