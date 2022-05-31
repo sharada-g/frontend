@@ -20,12 +20,33 @@ const Header = styled.div`
 `;
 
 function Home() {
-  const { ShowNewPostView } = useContextProvider();
+  const {
+    ShowNewPostView,
+    setShowNewPostView,
+    ShowNewReplyView,
+    setShowNewReplyView,
+  } = useContextProvider();
 
   return (
     <>
       <Header />
-      <ViewPost />({ShowNewPostView && <AddPost />})
+      <ViewPost />
+      {ShowNewPostView && (
+        <AddPost
+          ShowNewView={ShowNewPostView}
+          setShowNewView={() => setShowNewPostView(false)}
+          name="pseudonym"
+          details="post"
+        />
+      )}
+      {ShowNewReplyView && (
+        <AddPost
+          ShowNewView={ShowNewReplyView}
+          setShowNewView={() => setShowNewReplyView(false)}
+          name="pseudonym"
+          details="reply"
+        />
+      )}
     </>
   );
 }

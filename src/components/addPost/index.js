@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import { useContextProvider } from "../../context/contextProvider";
-
 const BgContainer = styled.button`
   position: fixed;
   top: 0px;
@@ -185,9 +183,7 @@ const NewPostBtnVariant = {
   },
 };
 
-function AddPost() {
-  const { ShowNewPostView, setShowNewPostView } = useContextProvider();
-
+function AddPost({ ShowNewView, setShowNewView, name, details }) {
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [formSubmited, setFormSubmited] = useState(false);
   const [formValue, setFormValue] = useState({
@@ -220,14 +216,14 @@ function AddPost() {
     // validate form name and detail
 
     if (formValue.name.length > 0 && formValue.detail.length > 0) {
-      setShowNewPostView(false);
+      setShowNewView(false);
     }
   };
   return (
     <>
       <BgContainer
         onClick={() => {
-          ShowNewPostView && setShowNewPostView(false);
+          ShowNewView && setShowNewView(false);
           setDisabledBtn(true);
         }}
       />
@@ -238,24 +234,24 @@ function AddPost() {
         exit="rest"
       >
         <DetailInput
-          placeholder="Write your post..."
+          placeholder={"Write your " + details + "..."}
           name="detail"
           value={formValue.detail}
           onChange={handleChange}
         />
 
         {formValue.detail.length < 1 && formSubmited && (
-          <ErrorMsg>Please write something in the post detail field</ErrorMsg>
+          <ErrorMsg>Please write your {details}!</ErrorMsg>
         )}
 
         <NameInput
-          placeholder="Enter your pseudonym"
+          placeholder={"Enter your " + name}
           name="name"
           value={formValue.name}
           onChange={handleChange}
         />
         {formValue.name.length < 1 && formSubmited && (
-          <ErrorMsg>Please enter your name in the pseudonym field</ErrorMsg>
+          <ErrorMsg>Please enter your {name}!</ErrorMsg>
         )}
         <NewPostBtn
           disabled={disabledBtn}
@@ -264,7 +260,6 @@ function AddPost() {
           animate={!disabledBtn ? "anim" : "disabled"}
           whileHover={!disabledBtn ? "hover" : ""}
           whileTap={!disabledBtn ? "press" : ""}
-          whiieDisabled={disabledBtn ? "disabled" : ""}
           exit="rest"
           onClick={handleSubmit}
         >

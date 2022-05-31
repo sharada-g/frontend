@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useContextProvider } from "../../../context/contextProvider";
+
 const CommentContainer = styled.div`
   background-color: white;
   width: 100%;
@@ -46,6 +48,7 @@ const CommentReplyBtn = styled.button`
 `;
 
 function CommentBox() {
+  const { ShowNewReplyView, setShowNewReplyView } = useContextProvider();
   return (
     <>
       <CommentContainer>
@@ -53,7 +56,13 @@ function CommentBox() {
         <CommentBody>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
         </CommentBody>
-        <CommentReplyBtn>Reply</CommentReplyBtn>
+        <CommentReplyBtn
+          onClick={() => {
+            !ShowNewReplyView && setShowNewReplyView(true);
+          }}
+        >
+          Reply
+        </CommentReplyBtn>
       </CommentContainer>
     </>
   );
