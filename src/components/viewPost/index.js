@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile } from "@fortawesome/free-solid-svg-icons";
 //components
 import Post from "./post";
 
@@ -28,6 +30,19 @@ const ReplyContainer = styled.div`
     margin-left: 5%;
     width: 95%;
   }
+`;
+const NoPostHeader = styled.h2`
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  width: 100%;
+  margin: auto;
+`;
+const NoPostText = styled.p`
+  margin-top: 10px;
+  font-size: 1rem;
+  color: white;
+  text-align: center;
 `;
 
 const ShowReply = ({ post, postIndex }) => {
@@ -72,7 +87,12 @@ function ViewPost() {
                 <ShowReply key={post.id} post={post} postIndex={postIndex} />
               ))
           ) : (
-            <p>No posts to show</p>
+            <>
+              <NoPostHeader>
+                Oh no! <FontAwesomeIcon icon={faFile} size="3x" />
+              </NoPostHeader>
+              <NoPostText>Nothing to see here! Please add a post!</NoPostText>
+            </>
           )}
         </AnimatePresence>
       </Container>
