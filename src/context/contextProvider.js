@@ -53,7 +53,7 @@ function ContextProvider(props) {
     // }, 5000);
   }, [data.posts.length]);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [ShowNewPostView, setShowNewPostView] = useState(false);
   const [ShowNewReplyView, setShowNewReplyView] = useState(false);
   const values = {
