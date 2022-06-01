@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
+import { useContextProvider } from "../../context/contextProvider";
+
 const BgContainer = styled.button`
   position: fixed;
   top: 0px;
@@ -183,7 +185,7 @@ const NewPostBtnVariant = {
   },
 };
 
-function AddPost({ ShowNewView, setShowNewView, name, details }) {
+function AddPost({ ShowNewView, setShowNewView, newPostHttp, name, details }) {
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [formSubmited, setFormSubmited] = useState(false);
   const [formValue, setFormValue] = useState({
@@ -210,13 +212,14 @@ function AddPost({ ShowNewView, setShowNewView, name, details }) {
   };
 
   //handle form submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmited(true);
     // validate form name and detail
 
     if (formValue.name.length > 0 && formValue.detail.length > 0) {
-      setShowNewView(false);
+      // submit form
+      newPostHttp(formValue);
     }
   };
   return (
