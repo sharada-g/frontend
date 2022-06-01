@@ -60,7 +60,6 @@ const LoadingCircleVariant = {
   anim: {
     y: "100%",
     transition: {
-      duraion: 0.25,
       yoyo: Infinity,
       ease: "easeInOut",
     },
