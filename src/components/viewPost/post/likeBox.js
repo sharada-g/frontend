@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
+import { useContextProvider } from "../../../context/contextProvider";
+
 const LikeContainer = styled.div`
   width: 5%;
   height: 80px;
@@ -168,28 +170,36 @@ const LikeNoIconVariant = {
   },
 };
 
-function LikeBox({ id, likes }) {
+function LikeBox({ type, id, likes }) {
+  const { likeHttp } = useContextProvider();
+
   // like yes
   const [showYesIcon, setShowYesIcon] = useState(false);
   const [showNoIcon, setShowNoIcon] = useState(false);
   const [disableShowIcon, setDisableShowIcon] = useState(false);
   const handleYesLike = () => {
     setDisableShowIcon(true);
-    setShowYesIcon(true);
-    setTimeout(() => {
-      setShowYesIcon(false);
-      setDisableShowIcon(false);
-    }, 5000);
+    //wait for likeHttp to finish
+    likeHttp(type, id, true).then(() => {
+      setShowYesIcon(true);
+      setTimeout(() => {
+        setShowYesIcon(false);
+        setDisableShowIcon(false);
+      }, 5000);
+    });
   };
   // like no
 
   const handleNoLike = () => {
     setDisableShowIcon(true);
-    setShowNoIcon(true);
-    setTimeout(() => {
-      setShowNoIcon(false);
-      setDisableShowIcon(false);
-    }, 2500);
+    //wait for likeHttp to finish
+    likeHttp(type, id, false).then(() => {
+      setShowNoIcon(true);
+      setTimeout(() => {
+        setShowNoIcon(false);
+        setDisableShowIcon(false);
+      }, 2500);
+    });
   };
 
   return (
@@ -219,12 +229,12 @@ function LikeBox({ id, likes }) {
         )}
         <LikeCount>{likes}</LikeCount>
         <LikeNoBtn
-          disabled={disableShowIcon}
+          disabled={disableShowIcon || likes === 0}
           variants={LikeNoBtnVariant}
           initial="rest"
           animate={!disableShowIcon ? "anim" : "disabled"}
-          whileHover={!disableShowIcon ? "hover" : ""}
-          whileTap="press"
+          whileHover={!disableShowIcon && likes > 0 ? "hover" : ""}
+          whileTap={likes > 0 ? "press" : ""}
           exit="rest"
           onClick={() => handleNoLike()}
         >

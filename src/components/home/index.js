@@ -23,7 +23,6 @@ function Home() {
   const {
     ShowNewPostView,
     setShowNewPostView,
-    newPostHttp,
     ShowNewReplyView,
     setShowNewReplyView,
   } = useContextProvider();
@@ -36,17 +35,18 @@ function Home() {
         <AddPost
           ShowNewView={ShowNewPostView}
           setShowNewView={() => setShowNewPostView(false)}
-          newPostHttp={newPostHttp}
+          type="post"
           name="pseudonym"
-          details="post"
+          detail="post"
         />
       )}
       {ShowNewReplyView && (
         <AddPost
           ShowNewView={ShowNewReplyView}
           setShowNewView={() => setShowNewReplyView(false)}
+          type="reply"
           name="pseudonym"
-          details="reply"
+          detail="reply"
         />
       )}
     </>

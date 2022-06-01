@@ -185,7 +185,9 @@ const NewPostBtnVariant = {
   },
 };
 
-function AddPost({ ShowNewView, setShowNewView, newPostHttp, name, details }) {
+function AddPost({ ShowNewView, setShowNewView, type, name, detail }) {
+  const { newHttp } = useContextProvider();
+
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [formSubmited, setFormSubmited] = useState(false);
   const [formValue, setFormValue] = useState({
@@ -219,7 +221,7 @@ function AddPost({ ShowNewView, setShowNewView, newPostHttp, name, details }) {
 
     if (formValue.name.length > 0 && formValue.detail.length > 0) {
       // submit form
-      newPostHttp(formValue);
+      newHttp(type, formValue);
     }
   };
   return (
@@ -237,15 +239,16 @@ function AddPost({ ShowNewView, setShowNewView, newPostHttp, name, details }) {
         exit="rest"
       >
         <DetailInput
-          placeholder={"Write your " + details + "..."}
+          placeholder={"Write your " + detail + "..."}
           name="detail"
           value={formValue.detail}
           onChange={handleChange}
           required
+          maxLength={200}
         />
 
         {formValue.detail.length < 1 && formSubmited && (
-          <ErrorMsg>Please write your {details}!</ErrorMsg>
+          <ErrorMsg>Please write your {detail}!</ErrorMsg>
         )}
 
         <NameInput
@@ -254,6 +257,7 @@ function AddPost({ ShowNewView, setShowNewView, newPostHttp, name, details }) {
           value={formValue.name}
           onChange={handleChange}
           required
+          maxLength={50}
         />
         {formValue.name.length < 1 && formSubmited && (
           <ErrorMsg>Please enter your {name}!</ErrorMsg>

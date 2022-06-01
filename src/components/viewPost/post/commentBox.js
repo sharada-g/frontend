@@ -79,15 +79,14 @@ const CommentReplyBtnVariant = {
   },
 };
 
-function CommentBox({ id, name, details }) {
-  const { ShowNewReplyView, setShowNewReplyView } = useContextProvider();
+function CommentBox({ id, name, detail }) {
+  const { ShowNewReplyView, setShowNewReplyView, setReplyId } =
+    useContextProvider();
   return (
     <>
       <CommentContainer>
-        <CommentName>
-          {name} {id}
-        </CommentName>
-        <CommentBody>{details}</CommentBody>
+        <CommentName>{name}</CommentName>
+        <CommentBody>{detail}</CommentBody>
         <CommentReplyBtn
           variants={CommentReplyBtnVariant}
           initial="rest"
@@ -96,6 +95,7 @@ function CommentBox({ id, name, details }) {
           whileTap="press"
           exit="rest"
           onClick={() => {
+            setReplyId(id);
             !ShowNewReplyView && setShowNewReplyView(true);
           }}
         >

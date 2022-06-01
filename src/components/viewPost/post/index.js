@@ -12,13 +12,13 @@ const Container = styled(motion.div)`
   flex-direction: row;
 `;
 
-function Post({ postId, post }) {
-  const { id, name, details, likes } = post;
+function Post({ type, postId, post }) {
+  const { id, name, detail, likes } = post;
   return (
     <>
       <Container>
-        <LikeBox id={id} likes={likes} />
-        <CommentBox id={id} name={name} details={details} />
+        <LikeBox type={type} id={id} likes={likes} />
+        <CommentBox id={postId} name={name} detail={detail} />
       </Container>
     </>
   );

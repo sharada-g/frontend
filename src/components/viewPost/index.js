@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,23 +48,23 @@ const NoPostText = styled.p`
 const ShowReply = ({ post, postIndex }) => {
   return (
     <motion.div
-      initial={{ y: -1000, opacity: 0 }}
+      initial={{ x: -1000, opacity: 0 }}
       animate={{
-        y: 0,
+        x: 0,
         opacity: 1,
         transition: {
-          delay: postIndex * 0.75,
+          delay: postIndex * 0.25,
           type: "spring",
           bounce: 0.5,
           duration: 0.75,
         },
       }}
     >
-      <Post key={postIndex} postId={post.id} post={post} />
-      {post.reply.length > 0
-        ? post.reply.map((reply, replyIndex) => (
+      <Post key={postIndex} type={"post"} postId={post.id} post={post} />
+      {post.Replies.length > 0
+        ? post.Replies.map((reply, replyIndex) => (
             <ReplyContainer key={replyIndex}>
-              <Post postId={post.id} post={reply} />
+              <Post type={"reply"} postId={post.id} post={reply} />
             </ReplyContainer>
           ))
         : null}
@@ -73,9 +73,11 @@ const ShowReply = ({ post, postIndex }) => {
 };
 
 function ViewPost() {
-  const { data } = useContextProvider();
+  const { getAllPostHttp, data } = useContextProvider();
   const { posts } = data;
-
+  useEffect(() => {
+    getAllPostHttp();
+  }, []);
   return (
     <>
       <Container>
